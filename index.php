@@ -16,7 +16,7 @@
                 </h1>
 
                 <!-- First Blog Post -->
-                
+                 
                     <?php 
                     $query = "SELECT * FROM posts";
                     $select_all_post = mysqli_query($conn, $query);
