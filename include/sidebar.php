@@ -5,14 +5,8 @@
                 <!-- Blog Search Well -->
                 <div class="well">
                     <h4>Blog Search</h4>
-                        <?php
-                        if(isset($_POST['submit'])){
-                            echo $searach = $_POST['search'];
-                        }
-
-                        ?>
-
-                    <form action="" method="post">
+                        
+                    <form action="search.php" method="post">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control">
                             <span class="input-group-btn">
