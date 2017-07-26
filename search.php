@@ -29,7 +29,7 @@
                           
                           $count = mysqli_num_rows($search_query);
                              if($count == 0){
-                                 echo "<h1> Nor Result </h1>";
+                                 echo "<h1> No Result </h1>";
                              }else{
 
                                 while($row = mysqli_fetch_assoc($search_query)){
