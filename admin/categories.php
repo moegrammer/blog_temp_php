@@ -17,29 +17,8 @@
 
 
                         <div class='col-xs-6'>
-                         <?php 
-                           if(isset($_POST['submit'])){
-                                $cat_title = $_POST['cat_title'];
 
-                                if($cat_title == " " || empty($cat_title)){
-                                    echo "This faield should be empty";
-                                }else{
-                                   $query = "INSERT INTO categories(cat_title) ";
-                                   $query .="VALUE('{$cat_title}') ";
-
-                                   $create_cat_query = mysqli_query($conn,$query);
-                                    if(!$create_cat_query){
-                                        die("Query Faild" . mysqli_error($conn));
-                                    }else{
-                                        header("Location: categories.php");
-                                    }
-
-                                }
-                           }
-                         
-                         
-                         ?>
-
+                        <?php insert_categories() ;?>
 
 
                             <form action="" method="post">
@@ -56,17 +35,50 @@
                             </form>
 
                              <?php 
-                                if(isset($_GET['edit'])){?>
+                                      if(isset($_GET['edit'])){
+                                        $cat_id = $_GET['edit'];
+
+                                        $query = "SELECT * FROM categories WHERE cat_id  =  $cat_id ";
+                                         $select_query_cat = mysqli_query($conn,$query);
+                                          if(!$query){
+                                              die("Query Faild " . mysqli_error($conn));
+                                           }else{
+                                               while($row = mysqli_fetch_assoc($select_query_cat)){
+                                                    $cat_id = $row['cat_id'];
+                                                    $cat_title = $row['cat_title'];
+                                               }
+                                           }
 
 
+                                            if(isset($_POST['update'])){
+
+                                    $a_cat_title = $_POST['a_cat_title'];
+                                     if($a_cat_title == " " || empty($a_cat_title)){
+                                    echo "This faield should be empty";
+                                   }else{
+                                    
+                                         $query = "UPDATE categories SET cat_title = '{$a_cat_title}' WHERE cat_id = {$cat_id} ";
+                                        
+
+                                         $update_query = mysqli_query($conn, $query);
+                                          if(!$update_query){
+                                              die("Query Faild" . mysqli_error($conn));
+                                          }else{
+                                               header("Location: categories.php");
+                                           }
+                                     }
+                              }
+
+
+                                      ?>
                                      <form action="" method="post">
                                             <div class="form-group">
                                             
                                                 <label for="cat_title">Category Name</label>
-                                                <input type="text" name="cat_title" class="form-control">
+                                                <input type="text" name="a_cat_title" class="form-control" value='<?php echo  $cat_title ;  ?>'>
                                             </div>
                                             <div class="form-group">
-                                                <input type="submit"  name="update" value="Add Category" class="btn btn-primary">
+                                                <input type="submit"  name="update" value="Update Category" class="btn btn-primary">
                                             </div>
 
                                     </form>
@@ -86,41 +98,10 @@
                                </thead>
                                <tbody>
 
-                              <?php
-          
-                                 $query = "SELECT * FROM categories";
-                                 $select_all_cat = mysqli_query($conn,$query);
-                                 if(!$select_all_cat){
-                                     die("Query Faild" . mysqli_error($conn));
-                                 }
-                                 while($row = mysqli_fetch_assoc($select_all_cat) ){
-                                     $cat_id = $row['cat_id'];
-                                     $cat_title = $row['cat_title'];
-
-                                     echo "<tr>
-                                             <td>{$cat_id}</td>
-                                             <td>{$cat_title}</td>
-                                             <td><a href='categories.php?delete={$cat_id}'>Delete</a></td>
-                                              <td><a href='categories.php?edit={$cat_id}'>Edit</a></td>
-                                          </tr>";
-                                 }
-                              
-                              
-                               ?>
-                               <?php
-                                      if(isset($_GET['delete'])){
-                                         $delet_cat_id = $_GET['delete'];
-
-                                         $query = "DELETE FROM categories WHERE cat_id = {$delet_cat_id} ";
-                                         $delet_query = mysqli_query($conn,$query);
-                                           if(!$delet_cat_id){
-                                               die("Query Faild" . mysqli_error($conn));
-                                           }else{
-                                               header("Location: categories.php");
-                                           }
-                                      }
-                               ?>
-
+                              <?php  selet_all_categories() ;  
+                                     delete_CategoriesById() ;
+                                 ?>
+                           
                                   
                                </tbody>
                            </table>

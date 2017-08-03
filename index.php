@@ -29,7 +29,7 @@
                         $post_img = $row['post_img'];
                         $post_content = $row['post_content'];
                         $post_comment_count = $row['post_comment_count'];
-                        $pist_status = $row['post_status'];?>
+                        $post_status = $row['post_status'];?>
 
                  
                    
