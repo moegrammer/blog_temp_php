@@ -85,7 +85,7 @@ function Selet_all_post_table(){
                                          <td>{$post_title}</td>
                                          <td>{$post_cat_id}</td>
                                          <td>{$post_status}</td>
-                                         <td><img src='image/{$post_img}'></td>
+                                         <td><img class='img-responsive' src='images/{$post_img}'></td>
                                          <td>{$post_tags}</td>
                                          <td>{$post_comment_count}</td>
                                          <td>{$post_date}</td>
