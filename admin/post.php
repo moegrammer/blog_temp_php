@@ -14,29 +14,40 @@
                             Posts page
                             <small>Subheading</small>
                         </h1>
+                     <?php
 
-                        <table class="table table-hover" >
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Author</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Image</th>
-                                    <th>Tags</th>
-                                    <th>Comments</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php  Selet_all_post_table(); ?>  
-                            </tbody>
-                        </table>
+                        if(isset($_GET['sorce'])){
+                            $sorce = $_GET['sorce'];
+                        }else{
+                            $sorce = '';
+                        }
+
+                        switch($sorce){
+                            case 'add_post';
+                           include "include/add_post.php";
+                            break;
+
+                            case 'edit_post';
+                            include "include/edit_post.php";
+                            break;
+
+                            case '3';
+                            echo "case 3";
+                            break;
+
+
+                            default:
+
+                            include "include/view_all_post.php";
+                            break;
+
+                        }
 
 
 
-                       
+
+                     ?>
+
                     </div>
                 </div>
                 <!-- /.row -->

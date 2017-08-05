@@ -12,8 +12,8 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
              <li><a href="../index.php">Home Site</a></li>
-              
-                
+
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -39,10 +39,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#post"><i class="fa fa-fw fa-arrows-v"></i> Post <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="post" class="collapse">
                             <li>
-                                <a href="post.php">Add Post</a>
+                                <a href="post.php?sorce=add_post">Add Post</a>
                             </li>
                             <li>
-                                <a href="#">View Post</a>
+                                <a href="post.php">View Post</a>
                             </li>
                         </ul>
                     </li>
@@ -62,7 +62,7 @@
                                 <a href="#">Dropdown Item</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
                     </li>

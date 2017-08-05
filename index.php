@@ -9,15 +9,15 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-                
+
                 <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
 
                 <!-- First Blog Post -->
-                 
-                    <?php 
+
+                    <?php
                     $query = "SELECT * FROM posts";
                     $select_all_post = mysqli_query($conn, $query);
                     while($row = mysqli_fetch_assoc($select_all_post)){
@@ -31,8 +31,8 @@
                         $post_comment_count = $row['post_comment_count'];
                         $post_status = $row['post_status'];?>
 
-                 
-                   
+
+
 
                 <h2>
                     <a href="#"><?php echo $post_title;  ?></a>
@@ -49,11 +49,11 @@
 
                 <hr>
  <?php  } ?>
-                
 
-               
 
-                 <!-- Pager 
+
+
+                 <!-- Pager
                 <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Older</a>

@@ -20,7 +20,7 @@ function insert_categories(){
 
                                 }
                            }
-                         
+
 
 }
 
@@ -85,10 +85,13 @@ function Selet_all_post_table(){
                                          <td>{$post_title}</td>
                                          <td>{$post_cat_id}</td>
                                          <td>{$post_status}</td>
-                                         <td><img class='img-responsive' src='images/{$post_img}'></td>
+                                         <td><img width='200' src='../images/{$post_img}'></td>
                                          <td>{$post_tags}</td>
                                          <td>{$post_comment_count}</td>
                                          <td>{$post_date}</td>
+                                         <td><a href='post.php?sorce=edit_post&p_id={$post_id}'>Edit</a></td>
+                                         <td><a href='post.php?delete={$post_id}'>Delete</a></td>
+
                                          </tr>" ;
 
                     }
