@@ -31,10 +31,10 @@
                             include "include/edit_post.php";
                             break;
 
-                          
+
                             default:
 
-                            include "include/view_all_post.php";
+                            include "include/view_all_comments.php";
                             break;
 
                         }

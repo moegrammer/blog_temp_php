@@ -14,7 +14,7 @@
                    if(isset($_GET['id'])){
                     $select_post_id = $_GET['id'];
 
-                     $query = "SELECT * FROM posts WHERE post_id = $select_post_id";
+                     $query = "SELECT * FROM posts WHERE post_cat_id = $select_post_id";
                                    $select_all_post = mysqli_query($conn, $query);
                                    if(!$select_all_post){
                                      die("Query Faild" . mysqli_error($conn));
@@ -30,42 +30,35 @@
                                        $post_comment_count = $row['post_comment_count'];
                                        $post_status = $row['post_status'];
                                        $post_tags = $row['post_tags'];
-                                     }?>
+                                    ?>
 
                     <!-- Blog Post -->
-                    <!-- Title -->
-                    <h1><?php echo $post_title;  ?></h1>
-                    <!-- Author -->
+                    <h2>
+                        <a href="post.php?id=<?php echo $post_id ?>"><?php echo $post_title;  ?></a>
+                    </h2>
                     <p class="lead">
-                        by <a href="#"><?php echo $post_author ; ?></a>
+                        by <a href="post.php?id=<?php echo $post_id ?>"><?php echo $post_author; ?></a>
                     </p>
-
-                    <hr>
-
-                    <!-- Date/Time -->
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
+                    <hr>
+                    <img class="img-responsive" src="images/<?php echo $post_img; ?>" alt="<?php echo $post_author; ?>">
+                    <hr>
+                    <p><?php echo $post_content; ?></p>
+                    <a class="btn btn-primary" href="post.php?id=<?php echo $post_id ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>
 
-                    <!-- Preview Image -->
-                    <img class="img-responsive" src="images/<?php echo $post_img; ?>" alt="">
+                    <?php }   }
+                       echo "<div class='alert alert-warning' role='alert'>There is No Posts for this Category</div>";
+                    ?>
 
-                    <hr>
-
-                    <!-- Post Content -->
-                    <p class="lead">
-                      <?php echo $post_content; ?>
-                    </p>
-
-                    <hr>
-        <?php     }  ?>
                     <!-- Blog Comments -->
 
 
                     <!-- Posted Comments -->
 
                     <!-- Comment -->
-                  <?php include("include/comment.php"); ?>
+
 
                 </div>
 

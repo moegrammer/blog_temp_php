@@ -17,6 +17,53 @@ $query = "SELECT * FROM posts WHERE post_id = '{$edit_id}' ";
                   $post_status = $row['post_status'];
                   $post_tags = $row['post_tags'];
 }
+if(isset($_POST['update_post'])){
+
+  $title = $_POST['p_title'];
+  $author = $_POST['p_author'];
+  $cat_id = $_POST['p_cat'];
+  $status = $_POST['p_status'];
+
+  $img = $_FILES['p_img']['name'];
+  $img_temp = $_FILES['p_img']['tmp_name'];
+
+  $tags = $_POST['p_tags'];
+  $content = $_POST['p_content'];
+
+    move_uploaded_file($img_temp, "../images/$img");
+
+      if(empty($img)){
+        $query = "SELECT * FROM posts WHERE post_id = $edit_id ";
+         $select_img = mysqli_query($conn,$query);
+
+         while($row = mysqli_fetch_array($select_img)){
+           $img = $row['post_img'];
+         }
+
+      }
+
+    $query = "UPDATE posts SET ";
+    $query .="post_title = '{$title}', ";
+    $query .="post_cat_id = '{$cat_id}', ";
+    $query .="post_date = now(), ";
+    $query .="post_status = '{$status}', ";
+    $query .= "post_author = '{$author}', ";
+    $query .= "post_tags = '{$tags}', ";
+    $query .= "post_content = '{$content}', ";
+    $query .= "post_img = '{$img}' ";
+    $query .= "WHERE post_id = {$edit_id} ";
+
+    $edit_post_query = mysqli_query($conn,$query);
+     if(!$edit_post_query){
+       die("Query Faild" . mysqli_error($conn));
+     }else{
+       echo "<div class='alert alert-success' role='alert'>Well done! You successfully edite the psot</div>";
+       header( "refresh:0.5;url=post.php" );
+     }
+
+}
+
+
  ?>
 
 
@@ -28,7 +75,7 @@ $query = "SELECT * FROM posts WHERE post_id = '{$edit_id}' ";
     </div>
 
     <div class="form-group">
-         <select name="" id="">
+         <select name="p_cat" id="">
            <?php
            $query = "SELECT * FROM categories ";
             $select_query_cat = mysqli_query($conn,$query);
@@ -38,7 +85,7 @@ $query = "SELECT * FROM posts WHERE post_id = '{$edit_id}' ";
                   while($row = mysqli_fetch_assoc($select_query_cat)){
                        $cat_id = $row['cat_id'];
                        $cat_title = $row['cat_title'];
-                       echo "<option value=''>{$cat_title}</option>";
+                       echo "<option value='$cat_id' >{$cat_title}</option>";
 
                   }
               }
@@ -80,7 +127,7 @@ $query = "SELECT * FROM posts WHERE post_id = '{$edit_id}' ";
     </div>
 
     <div class="form-group">
-      <input class="btn btn-primary" type="submit" name="create_post" value="Add Post" />
+      <input class="btn btn-primary" type="submit" name="update_post" value="Add Post" />
     </div>
 
 

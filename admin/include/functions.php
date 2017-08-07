@@ -82,8 +82,18 @@ function Selet_all_post_table(){
                                    echo "<tr>
                                         <td>{$post_id}</td>
                                          <td>{$post_author}</td>
-                                         <td>{$post_title}</td>
-                                         <td>{$post_cat_id}</td>
+                                         <td>{$post_title}</td>";
+                                                $query = "SELECT * FROM categories WHERE cat_id  =  $post_cat_id ";
+                                                $select_query_cat = mysqli_query($conn,$query);
+                                                 if(!$query){
+                                                     die("Query Faild " . mysqli_error($conn));
+                                                  }else{
+                                                      while($row = mysqli_fetch_assoc($select_query_cat)){
+                                                           $cat_id = $row['cat_id'];
+                                                           $cat_title = $row['cat_title'];
+                                                      }
+                                                  }
+                                        echo "<td>{$cat_title}</td>
                                          <td>{$post_status}</td>
                                          <td><img width='200' src='../images/{$post_img}'></td>
                                          <td>{$post_tags}</td>
@@ -97,5 +107,37 @@ function Selet_all_post_table(){
                     }
 
 }
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function Selet_all_comments_table(){
+    global $conn;
+      $query = "SELECT * FROM comments";
+                    $select_all_post = mysqli_query($conn, $query);
+                    while($row = mysqli_fetch_assoc($select_all_post)){
+                         $com_id = $row['com_id'];
+                         $com_post_id = $row['com_post_id'];
+                         $com_author = $row['com_author'];
+                         $com_email = $row['com_email'];
+                         $com_content = $row['com_content'];
+                         $com_status = $row['com_status'];
+                         $com_date = $row['com_date'];
+
+                                   echo "<tr>
+                                        <td>{$com_id}</td>
+                                         <td>{$com_post_id}</td>
+                                         <td>{$com_content}</td>
+                                         <td>{$com_author}</td>
+                                         <td>{$com_email}</td>
+                                         <td>{$com_status}</td>
+                                         <td>{$com_date}</td>
+                                         <td><a href=''>Approve</a></td>
+                                        <td><a href=''>Unapprove</a></td>
+                                         <td><a href='comments.php?sorce=edit_post&p_id={$com_id}'>Edit</a></td>
+                                         <td><a href='comments.php?delete={$com_id}'>Delete</a></td>
+
+                                         </tr>" ;
+
+                    }
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ?>

@@ -22,6 +22,9 @@
 
           if(!$create_post_query){
             die("Query Faild" . mysqli_error($conn));
+          }else{
+            echo "<div class='alert alert-success' role='alert'>Well done! You successfully Added  the psot</div>";
+            header( "refresh:0.5;url=post.php" );
           }
 
    }
@@ -38,9 +41,28 @@
     </div>
 
     <div class="form-group">
-         <lable for="p_cat">Post Category Id</lable>
-         <input type="text" class="form-control" name="p_cat" />
+         <select name="p_cat" id="">
+           <?php
+           $query = "SELECT * FROM categories";
+            $select_query_cat = mysqli_query($conn,$query);
+             if(!$query){
+                 die("Query Faild " . mysqli_error($conn));
+              }else{
+                  while($row = mysqli_fetch_assoc($select_query_cat)){
+                       $cat_id = $row['cat_id'];
+                       $cat_title = $row['cat_title'];
+                       echo "<option value='$cat_id' >{$cat_title}</option>";
+
+                  }
+              }
+
+
+
+           ?>
+
+         </select>
     </div>
+
 
 
 
